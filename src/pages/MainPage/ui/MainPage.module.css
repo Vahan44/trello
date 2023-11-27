@@ -1,0 +1,87 @@
+.mainPage {
+    color: #fff;
+    height: 100%;
+    width: 82%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+
+.leftSideBar li a{
+    text-decoration: none;
+    color: #bebdbd;
+    padding: 10px 170px 10px 10px;
+    border-radius: 7px;
+}
+
+.leftSideBar li a:hover {
+  background-color: #6b6b6b;
+}
+
+.mainPage li {
+    list-style: none;
+    padding-bottom: 10px;
+}
+
+.leftSideBar {
+    height: 100%;
+    color: #bebdbd;
+    width: 50%;
+    padding-top: 50px;
+
+}
+
+hr{
+    border: 1px solid white;
+}
+
+.addWorkspaces {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.plus:hover{
+    cursor: pointer;
+    color: #8f8b8b;
+}
+
+.leftSideBar div img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.leftSideBar li{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+.drop{
+    font-size: x-large;
+}
+
+.workspaceHeader{
+    display: flex;
+    align-items: center;
+}
+
+.WorkspaceTools{
+    margin-left: 0px;
+    width: 300px;
+}
+
+.logIn{
+    background-image: "https://mixkit.imgix.net/art/85/85-original.png-1000h.png";
+    height: 100%;
+    padding: 50px 170px 170px 100px ;
+}
+
+.mainPageBody{
+margin-left: -200px;
+}
