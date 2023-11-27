@@ -22,15 +22,15 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
   }
 
   // useEffect(() => console.log(user))
-  const app: HTMLElement | null = document.getElementById('app')
-  app.addEventListener('click', () => {
-    setTimeout(() => {
-      if(isUserMenuOpen){
-        toggleUserMenu();
-      }
-    }, 1000)
+  // const app: HTMLElement | null = document.getElementById('app')
+  // app.addEventListener('click', () => {
+  //   setTimeout(() => {
+  //     if(isUserMenuOpen){
+  //       toggleUserMenu();
+  //     }
+  //   }, 1000)
        
-  });
+  // });
   
   return (
     <header className={styles.header}>
