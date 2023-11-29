@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Header.module.css'
 import { FaTrello } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { HeaderProps } from "./Header.interface";
 import { RootState } from "../../UserData/store";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Header: FC<HeaderProps> = ({ handleSingOut }) => {
 
@@ -16,21 +16,20 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
 
 
   const [isUserMenuOpen, setUserMenuOpen] = useState<boolean>(false)
-
+  
+  const navigate = useNavigate()
   const toggleUserMenu = (): void => {
     setUserMenuOpen(!isUserMenuOpen);
   }
 
-  // useEffect(() => console.log(user))
-  // const app: HTMLElement | null = document.getElementById('app')
-  // app.addEventListener('click', () => {
-  //   setTimeout(() => {
-  //     if(isUserMenuOpen){
-  //       toggleUserMenu();
-  //     }
-  //   }, 1000)
-       
-  // });
+  const toggleCloaseUserMenu = (event: any) => {
+    if(event.target.className !== styles.userImage){
+      setUserMenuOpen(false);
+    }
+  }
+
+  document.addEventListener('click', toggleCloaseUserMenu);
+
   
   return (
     <header className={styles.header}>
@@ -49,7 +48,7 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
             </Link>
           </li> : null}
           <li>
-            {user ? <Link className={styles.create} to='/creatNewBoard'>
+            {user ? <Link className={styles.button} to='/creatNewBoard'>
               Create
             </Link> : null}
           </li>
@@ -62,10 +61,11 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
           <Link to='https://www.atlassian.com/legal/privacy-policy#what-this-policy-covers' className={styles.questiones}>
             <AiOutlineQuestionCircle />
           </Link>
-          <input className={styles.search} type="text" placeholder="search" />
-
           {user ? (
             <>
+          <input className={styles.search} type="text" placeholder="search" />
+
+          
               <img onClick={toggleUserMenu}
                 src={user.photoURL ? user.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'}
                 alt="user name"
@@ -75,7 +75,7 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
 
               {
                 isUserMenuOpen ? (
-                  <div className={styles.userMenu}>
+                  <div onClick = {toggleUserMenu}className={styles.userMenu}>
                     <ul>
                       <li>
                         <div>Trello</div>
@@ -83,9 +83,10 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
                       <li>
                         <div>Workspace</div>
                       </li>
-                      <li>
-                        <button className={styles.create} onClick={handleSingOut}>Sign Out</button>
-                      </li>
+                      <button className={styles.signOutButton}  onClick={()=> {
+                        handleSingOut()
+                        navigate('/')
+                      }}>Sign Out</button>
                     </ul>
 
                   </div>
@@ -94,8 +95,8 @@ const Header: FC<HeaderProps> = ({ handleSingOut }) => {
             </>
           ) : (
             <div className={styles.registers}>
-              <Link className={styles.loginButton} to='/logInPage'>Log in</Link>
-              <Link className={styles.loginButton} to='/SignUpPage'>Sign Up</Link>
+              <Link className={styles.button} to='/logInPage'>Log in</Link>
+              <Link className={styles.button} to='/SignUpPage'>Sign Up</Link>
 
             </div>
           )}

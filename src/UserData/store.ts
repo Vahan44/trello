@@ -9,7 +9,7 @@
 
 
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { userReducer, workspacesReducer } from './UserData';
+import { userReducer, workspacesReducer } from './UserSlice';
 
 const rootReducer = combineReducers({
     user: userReducer,

@@ -1,16 +1,23 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./MainPage.module.css"
 import { FaTrello } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { RootState } from "../../../UserData/store";
-import { useSelector, useDispatch } from 'react-redux'; 
+import { useSelector } from 'react-redux'; 
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaRegHeart } from "react-icons/fa";
 import Workspaces from "../../Workspaces/ui/Workspaces";
+
+
 const MainPage: FC = () => {
 
+
+const [workspaceMenue, setworkspaceMenue] = useState<boolean>(false)
     //const {displayWorkspace, setDisplayWorkspace} = useState<string>('all')
+    
+    
+    
     const user = useSelector((state: RootState) => {
         return state.user.user
       })
@@ -19,9 +26,13 @@ const MainPage: FC = () => {
         return state.workspaces.workspaces
       })
 
+function openWorkspaceMenue(){
+  setworkspaceMenue(!workspaceMenue)
+}
+
 
     return (
-    <div className={user ?  styles.mainPage : styles.logIn}>
+    <div className={styles.mainPage}>
             {user ? 
             <div className={styles.leftSideBar}>
             <ul>
@@ -39,24 +50,28 @@ const MainPage: FC = () => {
     return (
       <div className={styles.workspaces}>
         {tsx}
-        <div className={styles.workspaceHeader}>
+        <div onClick = {openWorkspaceMenue}className={styles.workspaceHeader}>
           <img src={img} alt="" />
           <p>{name}'s Workspaces</p>
-          <RiArrowDropDownLine className={styles.drop} />
+          <RiArrowDropDownLine className={workspaceMenue ? styles.up : styles.drop} />
         </div>
-        <ul className={styles.WorkspaceTools}>
-                <li>
-                <Link to="/">
-            <FaTrello />     Boards
-                </Link>
-                </li>
+       {
+        workspaceMenue ? (
+          <ul className={styles.WorkspaceTools}>
+          <li>
+          <Link to="/">
+      <FaTrello />     Boards
+          </Link>
+          </li>
 
-                <li>
-                <Link to="/">
-            <FaRegHeart />     Hightlights
-                </Link>
-                </li>
-            </ul>
+          <li>
+          <Link to="/">
+      <FaRegHeart />     Hightlights
+          </Link>
+          </li>
+      </ul>
+        ): null
+       }
       </div>
     )
   }, <></>)}

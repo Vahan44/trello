@@ -66,6 +66,12 @@ hr{
     font-size: x-large;
 }
 
+.up{
+    font-size: x-large;
+    transform: rotate(180deg);
+}
+
+
 .workspaceHeader{
     display: flex;
     align-items: center;
@@ -76,12 +82,13 @@ hr{
     width: 300px;
 }
 
-.logIn{
-    background-image: "https://mixkit.imgix.net/art/85/85-original.png-1000h.png";
-    height: 100%;
-    padding: 50px 170px 170px 100px ;
-}
+
 
 .mainPageBody{
 margin-left: -200px;
+}
+
+
+hr {
+    border: 1px solid #6b6b6b;
 }

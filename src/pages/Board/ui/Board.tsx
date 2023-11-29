@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { useSelector, useDispatch } from 'react-redux'; 
+import { RootState } from '../../../UserData/store';
 import {FC} from 'react'
 import "./Board.css"
 interface CardType {
@@ -36,6 +38,13 @@ interface boardProps{
 }
 
  const Board:FC<boardProps> = ({board}) => {
+
+  const workspaces = useSelector((state: RootState) => {
+    return state.workspaces.workspaces
+  })
+
+
+  const myBoard = workspaces.find
   const [columns, setColumns] = useState<ColumnType[]>(initialColumns);
 
   const onDragEnd = (result: any) => {

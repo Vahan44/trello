@@ -54,7 +54,7 @@
     align-items: center;
     margin-right: 20px;
     height: 100%;
-    width: 420px;
+    width: max-content;
   }
   
   .userImage {
@@ -71,11 +71,15 @@
   }
   .userMenu {
     position: absolute;
-    top: 50px;
+    top: 70px;
     right: 0;
-    background-color: #fff;
+    background-color: #1D2125;
+    color: #fff;
     border: 1px solid #e9e9e9;
     border-radius: 5px;
+    padding: 10px;
+    height: min-content;
+    width: 150px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
@@ -86,10 +90,14 @@
   }
   
   .userMenu ul li {
-    color: #242323;
     font-weight: 600;
     padding: 10px;
     margin: 0;
+  }
+
+  .userMenu ul li:hover {
+    text-align: left;
+    background-color: #5b5b5b;
   }
   
   .userMenu a {
@@ -104,7 +112,7 @@
     background-color: #f1f1f1;
   }
 
-  .create , .loginButton{
+  .button, .signOutButton{
     color: #000;
     text-decoration: none;
     background-color: #579DFF;
@@ -115,6 +123,10 @@
     font-weight: 600;
   }
 
+  .signOutButton{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
 .search {
   padding: 10px;
   background-color: #22272B;

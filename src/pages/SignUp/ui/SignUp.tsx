@@ -85,8 +85,7 @@ const SignUp: FC = () => {
                     placeholder="Enter your password"
                     onChange={passwordEvent}/>
                 <button onClick={signUp}
-                className = {styles.button_input} 
-                
+                className = {styles.button} 
                 >Continue</button>
             
                 <p>Or continue with:</p>

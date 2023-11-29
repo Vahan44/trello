@@ -1,49 +1,54 @@
-.LogInPage{
-    height: 100%;
-    width: 100%;
-    background-color: rgb(228, 228, 228);
-    display: flex;
-    justify-content: center;
-}
 
 
 .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(247, 247, 247);
+    background-color: #303538;
+    color: white;
     width: 400px;
-    box-shadow: 0 0 50px rgba(132, 131, 131, 0.664);
+    box-shadow: 0 0 5px rgba(132, 131, 131, 0.664);
     margin-top: 60px;
     margin-bottom: 60px;
     padding: 0 0 50px 0;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
     text-align: center;
 }
 .body{
     width:85%;
 }
 .container h1 {
-    color: rgb(45, 45, 179);
+    color: blue;
 }
 
-.email_input, .button_input{
+.email_input, .button{
+    background-color: #44494d;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
     height: 40px;
-    border-radius: 1px;
+    border-radius: 5px;
     border: 1px solid;
     width: 95%;
     margin-bottom: 10px;
 }
 
-.button_input{
+.button{
     background-color: blue;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
     font-weight: 600;
 }
 
 .buttons button{
+    color: white;
+    background-color: #44494d;
+    border-radius: 3px;
     height: 40px;
-    border-radius: 1px;
-    border: 1px solid;
+    border: 1px solid white;
     width: 95%;
     margin-bottom: 10px;
     cursor: pointer;

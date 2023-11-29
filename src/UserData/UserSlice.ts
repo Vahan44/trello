@@ -3,9 +3,7 @@ import { auth } from '../firebase'
 
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 interface Board {
-    'To do': string[];
-    'Doing': string[];
-    'Done': string[];
+    [cardName:string]:string[]
   }
   
   interface Boards {
