@@ -7,6 +7,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import {GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth'
 import {useNavigate } from 'react-router-dom';
+import { loginWithGithub, loginWithGoogle } from "../../../Redux/userSlice";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 const SignUp: FC = () => {
 
@@ -14,30 +16,20 @@ const SignUp: FC = () => {
     const [password, setPassword] = useState<string>("");
 
 
-    const signinWithGoogle = async () => {
-        const GoogleProvider = new GoogleAuthProvider();
-    
-        try {
-            await signInWithPopup(auth, GoogleProvider)
-            goToMainPage()
-        }
-        catch (error) {
-            console.log(error)
-        }
-      }
+    const dispatch = useAppDispatch()
 
 
-      const signinWithGithub = async () => {
-        const GithubProvider = new GithubAuthProvider();
-    
-        try {
-            await signInWithPopup(auth, GithubProvider)
-            goToMainPage()
-        }
-        catch (error) {
-            console.log(error)
-        }
-      }
+    const handleGoogleLogin = async () => {
+      await dispatch(loginWithGoogle())
+      navigate('/');
+    }
+
+
+
+    const handleGithubLogin = async () => {
+      await dispatch(loginWithGithub())
+      navigate('/');
+    }
 
       const signUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -90,8 +82,8 @@ const SignUp: FC = () => {
             
                 <p>Or continue with:</p>
                 <div className={styles.buttons}>
-                <button onClick={signinWithGoogle}><img src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.518/google-logo.5867462c.svg" alt="" className={styles.Gico}/>Google</button>
-                <button onClick={signinWithGithub}><FaGithub className={styles.Gico}/>GitHub</button>
+                <button onClick={handleGoogleLogin}><img src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.518/google-logo.5867462c.svg" alt="" className={styles.Gico}/>Google</button>
+                <button onClick={handleGithubLogin}><FaGithub className={styles.Gico}/>GitHub</button>
                 </div>
             </div>
         </div>

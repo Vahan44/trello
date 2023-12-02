@@ -7,131 +7,57 @@ import styles from './App.module.css';
 import Header from '../Header/ui/Header';
 import LogInPage from '../pages/LogInPage/ui';
 import Dashboard from './Dashboaard';
-import { setUser, setWorkspaces } from '../UserData/UserSlice';
+//import { setUser, setWorkspaces } from '../UserData/UserSlice';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
 import { auth } from '../../src/firebase'
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../UserData/store';
+import { RootState } from '../Redux/store';
 import SignUp from '../pages/SignUp/ui/SignUp';
 import Workspaces from '../pages/Workspaces/ui/Workspaces';
 import Board from '../pages/Board/ui/Board';
-import HomePage from '../pages/HomePage/ui';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { autoLogIn } from '../Redux/userSlice';
 
 const App: FC = () => {
-
-
-  const user = useSelector((state: RootState) => {
-    return state.user.user
-  })
-
-
-  const dispatch = useDispatch()
-
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-
-      dispatch(setUser(currentUser))
-      console.log(user);
-
-
-    })
-
-    return unsubscribe;
+    dispatch(autoLogIn())
   }, [])
 
 
-  const workspaces = {
-    workspace1: {
-      name: user?.displayName,
-      img: user?.photoURL,
-      boards: {
-        'ACAfinalproject': {
-          'To do': [
-            'add some themes',
-            'add mail/password sign up method'
-          ],
-          'Doing': [
-            'add coent slice'
-          ],
-          'Done': [
-            'sign in clice ',
-            'main page slice',
-            'redax tools'
-          ]
-        },
-        'ACA final proje': {
-          'To do': [
-            'add some themes',
-            'add mail/password sign up method'
-          ],
-          'Doing': [
-            'add coent slice'
-          ],
-          'Done': [
-            'sign in clice ',
-            'main page slice',
-            'redax tools'
-          ]
-        }
-        ,
-        'ACA final projet': {
-          'To do': [
-            'add some themes',
-            'add mail/password sign up method'
-          ],
-          'Doing': [
-            'add coent slice'
-          ],
-          'Done': [
-            'sign in clice ',
-            'main page slice',
-            'redax tools'
-          ]
-        }
-      }
-    }
-  }
-
-  dispatch(setWorkspaces(workspaces))
+  const user = useSelector((state: RootState) => {
+    return state.user
+  })
 
 
-  const handleSingOut = () => {
-    signOut(auth).catch(error => console.log(error))
-  }
+
+
+ 
 
 
 
   return (
     <BrowserRouter>
-      <Header handleSingOut={handleSingOut} />
+      <Header />
 
       <div className={styles.App} id='app'>
         <Routes >
 
           <Route path='/' element={<Dashboard />} />
-
-          {user ? <>
+          <Route path='*' element={<h1 >Not Foung</h1>} />
+          {user.profile ? <>
 
             <Route path='/about' element={<AboutPage />} />
             <Route path='/MainPage' element={<MainPage />} />
             <Route path='/Workspaces' element={<Workspaces />} />
-            {Object.entries(workspaces).reduce((routes, [workspaceName, { name: nm, img, boards }]) => {
-              let element = []
-              for (let i in boards) {
-                element.push(<Route path={"/" + i.replace(/\s/g, '') + 'Board'} element={<Board board={i} />} />)
-              }
-              return (
-                <>
-                  {element}
+            <Route path='/board/:id' element={<Board />} />
 
-                </>
-              )
-            }, <></>)}</> :
-            <>
-              <Route path='/LogInPage' element={<LogInPage />} />
-              <Route path='/SignUpPage' element={<SignUp />} />
-            </>}
+          </> : <>
+            <Route path='/LogInPage' element={<LogInPage />} />
+            <Route path='/SignUpPage' element={<SignUp />} />
+          </>
+          }
 
 
         </Routes>

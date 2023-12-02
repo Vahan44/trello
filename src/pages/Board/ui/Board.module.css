@@ -1,0 +1,87 @@
+.Board{
+    display: flex;
+    padding: 0 50px 0 50px;
+    height: 500px;
+    width: 900px;
+    margin-top: 100px;
+    color: rgb(255, 255, 255);
+   }
+   
+   .column{
+       padding: 10px;
+       background-color: rgb(41, 111, 111);
+       border-radius: 10px;
+       border: 1px;
+       width: 25%;
+       height: max-content;
+       align-items: start;
+       text-align: start;
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+       margin-bottom: 10px;
+   }
+
+
+
+   .card{
+    background-color: #22272B;
+    padding: 10px;
+       text-align: start;
+       border-radius: 10px;
+       margin-top: 10px;
+       width: 90%;
+       margin-bottom: 20px;
+       transform: translate(1s);
+   }
+
+   .card:hover{
+    border: 1px solid rgb(0, 174, 255);
+   }
+
+.boardName{
+    color: rgb(175, 168, 168);
+    text-transform: uppercase;
+   margin-left: 70px;
+}
+
+.addCard{
+    background: fixed;
+    font-size: larger;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+}
+
+.addCard:hover{
+    background-color: aliceblue;
+    
+}
+
+.colName{
+    text-transform: uppercase;
+}
+
+.pen{
+    position: absolute;
+    margin-right: 0;
+    color: #22272B;
+}
+
+.pen:hover{
+    color: rgb(184, 184, 184);
+}
+
+.add{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(152, 154, 156);
+    border: none;
+    margin-left: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
