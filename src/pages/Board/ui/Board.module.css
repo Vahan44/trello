@@ -1,18 +1,17 @@
 .Board{
     display: flex;
     padding: 0 50px 0 50px;
-    height: 500px;
     width: 900px;
     margin-top: 100px;
     color: rgb(255, 255, 255);
    }
    
    .column{
-       padding: 10px;
-       background-color: rgb(41, 111, 111);
+       padding: 10px 20px 10px 20px;
+       background-color: rgb(29, 81, 81);
        border-radius: 10px;
        border: 1px;
-       width: 25%;
+       width: max-content;
        height: max-content;
        align-items: start;
        text-align: start;
@@ -20,19 +19,22 @@
        flex-direction: column;
        justify-content: space-between;
        margin-bottom: 10px;
+       margin-right: 30px;
    }
 
 
 
    .card{
     background-color: #22272B;
-    padding: 10px;
+    padding: 15px;
        text-align: start;
        border-radius: 10px;
        margin-top: 10px;
-       width: 90%;
-       margin-bottom: 20px;
+       width: 160px;
+       margin-bottom: 7px;
        transform: translate(1s);
+       cursor: pointer;
+       height: min-content;
    }
 
    .card:hover{
@@ -54,11 +56,11 @@
     cursor: pointer;
     border-radius: 10px;
     padding: 10px;
-    width: 90%;
+    width: 97%;
 }
 
 .addCard:hover{
-    background-color: aliceblue;
+    background-color: rgb(240, 255, 243);
     
 }
 
@@ -68,20 +70,256 @@
 
 .pen{
     position: absolute;
-    margin-right: 0;
-    color: #22272B;
+    margin-top: -15px;
+    margin-left: 135px;
 }
 
-.pen:hover{
+.pen, .commentButton{
     color: rgb(184, 184, 184);
+    border-radius: 50%;
+    padding: 7px;
+    background: fixed;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+.pen:hover, .commentButton:hover{
+  background-color: rgb(165, 170, 174);
+  color: #22272B;
 }
+
+
 
 .add{
     height: 50px;
     width: 50px;
-    background-color: rgb(152, 154, 156);
+    background-color: rgb(152, 156, 153);
     border: none;
-    margin-left: 20px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+
+.addCardContainer{
+    display: flex;
+}
+.newTaskInput, .save, .deleteCard{
+    border-radius: 10px;
+    padding: 10px 5px 10px 5px;
+    background-color: rgb(192, 195, 197);
+    font-weight: 600;
+
+}
+
+.save{
+    background-color: rgb(20, 80, 80);
+    color: white;
+    border: 2px solid #22272B;
+    cursor: pointer;
+}
+
+
+.deleteCard{
+    color: white;
+    border: 2px solid #22272B;
+    cursor: pointer;
+    background-color: red;
+}
+.newTaskInput{
+    width: 165px;
+
+}
+
+
+.changeCardInput{
+    background: fixed;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 2px;
+    width: 140px;
+}
+
+.addListContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 50px;
+    background:fixed;
+    border: 2px solid rgb(192, 195, 197);
+    height: max-content;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.confirmAddingList{
+padding: 10px ;
+border-radius: 8px;
+background-color: rgb(20, 80, 80);
+color: white;
+margin-top: 10px;
+}
+
+
+.titleContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.delButton{
+    background: fixed;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+.commentSection{
+    display: flex;
+    position: absolute;
+    background-color: #353a3f;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 600px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.commentSection h1{
+    color: white;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+.commentsList{
+    width: 92%;
+    list-style: none;
+    overflow-y: auto;
+}
+
+
+.writeCommentContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.submitComment{
+    width: 18%;
+    padding: 10px;
+    background-color:rgb(20, 80, 80);
+    color: white;
+    font-size: larger;
+    border-radius: 0 15px 15px 0;
+    border: none;
+}
+
+.commentInput{
+    width: 68%;
+    padding: 10px;
+    border-radius: 15px 0 0 15px ;
+    border: none;
+
+}
+
+
+.comment{
+    display: flex;
+    color: white;
+    flex-direction: column;
+}
+
+.comment img{
+    height: 50px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+
+.mycomment img{
+    height: 50px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.mycomment{
+    display: flex;
+    color: white;
+    flex-direction: column;
+}
+
+.mycomment div{
+display: flex;
+flex-direction: row-reverse;
+align-items: center;
+
+}
+
+.comment div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.comment div p{
+    background-color: #22272B;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 50px 10px 50px;
+    min-height: 30px;
+    text-align: center;
+    line-height: 2
+    
+    }
+
+    .mycomment div p{
+        background-color: #22272B;
+        border-radius: 10px;
+        color: white;
+        padding: 10px 50px 10px 50px;
+        min-height: 30px;
+        text-align: center;
+        max-width: 300px;
+        
+        }
+
+
+
+.closeModal{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-weight: 1000;
+    font-size: x-large;
+    background: fixed;
+    border-radius: 0 0 0 10px ;
+    margin-left: 960px;
+}
+
+.closeModal:hover{
+    background-color: red;
+    
+}
+
+.obautauthor{
+    display: flex;
+    flex-direction: column;
+}
+.blok{
+display: flex;
+flex-direction: column;
+height: max-content;
 }

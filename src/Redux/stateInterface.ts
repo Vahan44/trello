@@ -5,13 +5,13 @@ interface Comment {
     authorImg: string;
   }
   
-  interface Card {
+  export interface Card {
     content: string;
     id: string;
     comments: Comment[] ;
   }
   
-  interface Column {
+  export interface Column {
     title: string;
     cards: Card[];
     id: string;
@@ -20,11 +20,10 @@ interface Comment {
  export interface BoardType {
     columns: Column[];
     name: string;
-    id: any;
+    id: string;
   }
   
  export interface Data {
-    name: string;
     id: string;
     board: BoardType;
   }

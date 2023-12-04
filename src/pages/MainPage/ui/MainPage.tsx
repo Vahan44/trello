@@ -47,12 +47,12 @@ const MainPage: FC = () => {
             <hr />
             <li className={styles.addWorkspaces}>
               <small>Workspaces</small>
-              <FaPlus className={styles.plus} />
+              
             </li>
 
             <div className={styles.workspaces}>
               <div onClick={openWorkspaceMenue} className={styles.workspaceHeader}>
-                <img src={user.profile?.photoURL ? user.profile?.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'} alt="" />
+                <img loading = "lazy"src={user.profile?.photoURL ? user.profile?.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'} alt="" />
                 <p>{user.profile?.displayName}'s Workspaces</p>
                 <RiArrowDropDownLine className={workspaceMenue ? styles.up : styles.drop} />
               </div>
@@ -60,14 +60,8 @@ const MainPage: FC = () => {
                 workspaceMenue ? (
                   <ul className={styles.WorkspaceTools}>
                     <li>
-                      <Link to="/">
+                      <Link to="/workspaces">
                         <FaTrello />     Boards
-                      </Link>
-                    </li>
-
-                    <li>
-                      <Link to="/">
-                        <FaRegHeart />     Hightlights
                       </Link>
                     </li>
                   </ul>

@@ -21,7 +21,7 @@ export const signInWithEmailPassword = createAsyncThunk(
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             displayName: userCredential.user.displayName,
-            photoURL: userCredential.user.photoURL
+            photoURL: userCredential.user.photoURL || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6M4NWghKPuAh1lEjThjCMcdSp9cn029guiwej3QjFg&s'
         }
         return userData;
          
@@ -33,6 +33,19 @@ export const signInWithEmailPassword = createAsyncThunk(
     )
 
 
+    export const signUpWithMailPassword = createAsyncThunk(
+        'user.signUpWithMailPassword',
+        async ([email, password]: string[]) => {
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                console.log(userCredential);
+                
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            }
+    )
 export const loginWithGoogle = createAsyncThunk(
     'user/loginWithGoogle',
     async (_, { rejectWithValue }) => {

@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import {GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth'
 import {useNavigate } from 'react-router-dom';
-import { loginWithGithub, loginWithGoogle } from "../../../Redux/userSlice";
+import { loginWithGithub, loginWithGoogle, signUpWithMailPassword } from "../../../Redux/userSlice";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 const SignUp: FC = () => {
@@ -32,21 +32,13 @@ const SignUp: FC = () => {
     }
 
       const signUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            console.log(userCredential);
-            goToMainPage()
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        dispatch(signUpWithMailPassword([email, password]))
       };
 
 
       const navigate = useNavigate();
 
       const goToMainPage = () => {
-        // Change the route to "/about"
         navigate('/');
       };
 

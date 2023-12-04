@@ -9,7 +9,7 @@ import {
 } from "@firebase/firestore";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "../firebase";
-import { State } from "./stateInterface";
+import { BoardType, State } from "./stateInterface";
 
 export const fetchPosts = createAsyncThunk("blog/fetchPosts", async () => {
   const querySnapshot = await getDocs(collection(db, "boards"));
@@ -43,14 +43,14 @@ export const updatePost = createAsyncThunk(
   "blog/updatePost",
   async ({ id, newBoard }: { id: string; newBoard: any }) => {
     const postRef = doc(db, "boards", id);
-    await updateDoc(postRef, newBoard);
-    return { id, ...newBoard };
+    await updateDoc(postRef, {board: newBoard});
+    return { id, newBoard };
   }
 );
 
 export const deletePost = createAsyncThunk(
   "blog/deletePost",
-  async (id: string) => {
+  async (id: any) => {
     const postRef = doc(db, "boards", id);
     await deleteDoc(postRef);
     return id;
@@ -126,7 +126,7 @@ export const boardsSlice = createSlice({
       );
 
       if (index !== -1) {
-        state.boards[index] = action.payload;
+        state.boards[index] = {id: action.payload.id, board: action.payload.newBoard};
       }
     },
     [updatePost.rejected as any]: (state, action) => {

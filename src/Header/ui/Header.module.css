@@ -133,6 +133,7 @@
   border: 1px solid rgb(60, 60, 60);
   border-radius: 5px;
   width: 50%;
+  color: #ffff;
 }
 
 
@@ -159,4 +160,28 @@
   display: flex;
   justify-content: space-around;
 
+}
+
+
+.results{
+  padding: 5px;
+  height: max-content;
+  border-radius: 5px;
+  width: 135px;
+  position: absolute;
+  list-style: none;
+  top: 70px;
+  right: 90px;
+  background-color: #504d4d;
+  box-shadow: 0px 4px 10px rgba(0,0,0,.2);
+  display: flex;
+  align-items: start;
+  
+}
+
+
+.searchItem {
+  list-style: none;
+  background: fixed;
+  
 }

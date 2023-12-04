@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { render } from "react-dom";
 import { BrowserRouter, Route, Routes, RedirectFunction, useNavigate } from 'react-router-dom'
-import AboutPage from "../pages/AboutPage/ui"
 import MainPage from '../pages/MainPage/ui/MainPage';
 import styles from './App.module.css';
 import Header from '../Header/ui/Header';
@@ -48,7 +47,6 @@ const App: FC = () => {
           <Route path='*' element={<h1 >Not Foung</h1>} />
           {user.profile ? <>
 
-            <Route path='/about' element={<AboutPage />} />
             <Route path='/MainPage' element={<MainPage />} />
             <Route path='/Workspaces' element={<Workspaces />} />
             <Route path='/board/:id' element={<Board />} />

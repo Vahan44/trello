@@ -1,6 +1,4 @@
-.workspaces{
-    
-}
+
 
 .workspaceHeader{
     text-align: center;
@@ -55,7 +53,22 @@ a{
     color: rgb(250, 250, 250);
     padding: 5px;
     border-radius: 15px;
-    
+    text-align: center;
+    cursor: pointer;
+}
+.Bcr button{
+    background: fixed;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    cursor: pointer;
 }
 .board {
     font-weight: 800;
@@ -63,4 +76,15 @@ a{
     justify-content: center;
 }
 
+
+.plus{
+    font-size: 40px;
+    opacity: 0.7;
+}
+
+.BoardNameInput{
+width: 80%;
+padding: 10px;
+border-radius: 5px;
+}
 

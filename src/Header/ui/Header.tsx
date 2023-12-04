@@ -8,6 +8,7 @@ import { RootState } from "../../Redux/store";
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { handleSingOut } from "../../Redux/userSlice";
+import { server } from "typescript";
 const Header: FC = () => {
 
   const user = useSelector((state: RootState) => {
@@ -15,8 +16,13 @@ const Header: FC = () => {
   })
 
 
-  const [isUserMenuOpen, setUserMenuOpen] = useState<boolean>(false)
+  const boards = useSelector((state: RootState) => {
+    return state.boards.boards
+  })
 
+  const [isUserMenuOpen, setUserMenuOpen] = useState<boolean>(false)
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [search, searchChange] = useState<string>('')
   const navigate = useNavigate()
 
   const dispach = useAppDispatch()
@@ -28,11 +34,27 @@ const Header: FC = () => {
   }
 
   const toggleCloaseUserMenu = (event: any) => {
-    if (event.target.className !== styles.userImage) {
+    if (event.target.className !== styles.userImage && event.target.className !== styles.search) {
       setUserMenuOpen(false);
+      setIsSearching(false)
     }
   }
 
+
+
+  const toggleCloaseSearchBar = (event: any) => {
+    if (event.target.className !== styles.search) {
+      setIsSearching(false)
+    }
+  }
+
+
+
+  const onSearch = (event: any) => {
+    searchChange(event.target.value)
+  }
+
+  document.addEventListener('click', toggleCloaseSearchBar);
   document.addEventListener('click', toggleCloaseUserMenu);
 
   const logOut = () => {
@@ -70,14 +92,32 @@ const Header: FC = () => {
           <Link to='https://www.atlassian.com/legal/privacy-policy#what-this-policy-covers' className={styles.questiones}>
             <AiOutlineQuestionCircle />
           </Link>
-          {user.profile ? (
+          {user?.profile ? (
             <>
-              <input className={styles.search} type="text" placeholder="search" />
+              <input onChange={onSearch} onClick = {()=>setIsSearching(true)} className={styles.search} type="text" placeholder="search" />
+              {isSearching ? <div className={styles.results}>
+                <ul>
+                  {boards.reduce((jsx: any, {id, board}) => {
+                    return (
+                      <>
+                       
+                      {jsx}
+                      {board.name.includes(search) ? 
+                      <li key = {board.id} className = {styles.searchItem}>
+                        <Link onClick={()=>{setIsSearching(false)}} to={{pathname:`/board/${id}`}}>
+                             {board.name}
+                          </Link>
+                          <hr />
+                      </li>: null}</>
+                    ) 
+                  }, <></>)}
+                </ul>
+              </div>: null}
 
 
-              <img loading="lazy" onClick={toggleUserMenu}
-                src={user.profile?.photoURL ? user.profile?.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'}
-                alt="user name"
+              <img loading = "lazy" onClick={toggleUserMenu}
+                src={user.profile.photoURL || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6M4NWghKPuAh1lEjThjCMcdSp9cn029guiwej3QjFg&s'}
+                alt=""
                 className={styles.userImage}
 
               />

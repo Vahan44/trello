@@ -92,3 +92,7 @@ margin-left: -200px;
 hr {
     border: 1px solid #6b6b6b;
 }
+
+.workspaceHeader{
+    cursor: pointer;
+}
