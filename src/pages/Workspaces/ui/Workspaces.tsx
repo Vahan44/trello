@@ -40,8 +40,8 @@ const creatingBoard = () => {
 }
   
 
-  const addBoard = () => {
-if(newBoardName){
+  const addBoard = (cancle: boolean) => {
+if(newBoardName && cancle){
   dispatch(createPost({
     board:{
       name: newBoardName,
@@ -53,6 +53,8 @@ if(newBoardName){
   ).then(() => {
     updatingBoard(false)
   })
+}else{
+  updatingBoard(false)
 }
 
   }
@@ -106,7 +108,8 @@ if(newBoardName){
                   addingBoard ? 
                   <div>
                     <input type="text" className={styles.BoardNameInput} onChange={onNewBoargName} placeholder='Board name'/>
-                    <button className = {styles.addBoard}onClick={addBoard}>Add board</button>
+                    <button className = {styles.addBoard} onClick={() => addBoard(true)}>Add board</button>
+                    <button className = {styles.addBoard} onClick={() => addBoard(false)}><small>cancle</small></button>
                   </div> :
                   <button onClick={creatingBoard}>Create new board <FaPlus className={styles.plus}/></button>
 
