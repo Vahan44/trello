@@ -6,7 +6,8 @@ import { RiArrowDropDownLine } from "react-icons/ri"
 import { Link, Navigate, useParams } from 'react-router-dom';
 import styles from "./Workspaces.module.css"
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { createPost, fetchPost, fetchPosts } from '../../../Redux/boardsSlice';
+import { createPost, deletePost, fetchPost, fetchPosts } from '../../../Redux/boardsSlice';
+import { MdDelete } from 'react-icons/md';
 
 
 const Workspaces: FC = () => {
@@ -56,6 +57,11 @@ if(newBoardName){
 
   }
 
+  const deleteBoard = (boardId : any) => {
+     dispatch(deletePost(boardId))
+  }
+
+
   const onNewBoargName = (e: any) => {
     setNewBoardName(e.target.value);
   }
@@ -82,7 +88,9 @@ if(newBoardName){
                   <>
                     {tsx}
                     <li className={styles.Bli} >
-                      
+                      <button className = {styles.deleteBoard} onClick={() => deleteBoard(id)} name = {id}>
+                      <MdDelete />
+                      </button>
                       <Link className={styles.board} to = {`/board/${id}`}>
                       <h4>{board.name}</h4> 
                       </Link>

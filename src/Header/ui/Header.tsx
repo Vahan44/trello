@@ -94,28 +94,28 @@ const Header: FC = () => {
           </Link>
           {user?.profile ? (
             <>
-              <input onChange={onSearch} onClick = {()=>setIsSearching(true)} className={styles.search} type="text" placeholder="search" />
+              <input onChange={onSearch} onClick={() => setIsSearching(true)} className={styles.search} type="text" placeholder="search" />
               {isSearching ? <div className={styles.results}>
                 <ul>
-                  {boards.reduce((jsx: any, {id, board}) => {
+                  {boards.reduce((jsx: any, { id, board }) => {
                     return (
                       <>
-                       
-                      {jsx}
-                      {board.name.includes(search) ? 
-                      <li key = {board.id} className = {styles.searchItem}>
-                        <Link onClick={()=>{setIsSearching(false)}} to={{pathname:`/board/${id}`}}>
-                             {board.name}
-                          </Link>
-                          <hr />
-                      </li>: null}</>
-                    ) 
+
+                        {jsx}
+                        {board.name.includes(search) ?
+                          <li key={board.id} className={styles.searchItem}>
+                            <Link onClick={() => { setIsSearching(false) }} to={{ pathname: `/board/${id}` }}>
+                              {board.name}
+                            </Link>
+                            <hr />
+                          </li> : null}</>
+                    )
                   }, <></>)}
                 </ul>
-              </div>: null}
+              </div> : null}
 
 
-              <img loading = "lazy" onClick={toggleUserMenu}
+              <img loading="lazy" onClick={toggleUserMenu}
                 src={user.profile.photoURL || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6M4NWghKPuAh1lEjThjCMcdSp9cn029guiwej3QjFg&s'}
                 alt=""
                 className={styles.userImage}
@@ -127,10 +127,14 @@ const Header: FC = () => {
                   <div onClick={toggleUserMenu} className={styles.userMenu}>
                     <ul>
                       <li>
-                        <div>Trello</div>
+                        <Link to='/'>
+                          Trello
+                        </Link>
                       </li>
                       <li>
-                        <div>Workspace</div>
+                        <Link to='/Workspaces'>
+                          Workspace
+                        </Link>
                       </li>
                       <button className={styles.signOutButton} onClick={logOut}>Sign Out</button>
                     </ul>

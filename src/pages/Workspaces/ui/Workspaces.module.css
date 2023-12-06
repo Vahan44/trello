@@ -88,3 +88,31 @@ padding: 10px;
 border-radius: 5px;
 }
 
+
+
+.deleteBoard{
+    background: fixed;
+    border: none;
+    font-size: larger;
+    color: #ffffff;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+
+.deleteBoard:hover{
+    transform: scale(1.5);
+    transition: 0.5s;
+    background-color: #d0caca;
+    color: rgb(46, 46, 46);
+}
+
+
+.addBoard{
+    background-color: black;
+}

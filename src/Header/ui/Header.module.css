@@ -16,6 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-width: 580px;
   }
   
   .link {
@@ -93,6 +94,7 @@
     font-weight: 600;
     padding: 10px;
     margin: 0;
+    align-items: center;
   }
 
   .userMenu ul li:hover {
@@ -100,17 +102,9 @@
     background-color: #5b5b5b;
   }
   
-  .userMenu a {
-    display: block;
-    padding: 7px 14px;
-    min-width: 150px;
-    color: #000;
-    text-decoration: none;
-  }
+
   
-  .userMenu a:hover {
-    background-color: #f1f1f1;
-  }
+
 
   .button, .signOutButton{
     color: #000;
