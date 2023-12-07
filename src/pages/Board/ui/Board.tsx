@@ -440,7 +440,7 @@ const Board: FC = () => {
             {
               board?.columns?.find((col: Column) => col.id === commentModalIsOpen[0])
                 ?.cards?.find((card: any) => card.id === commentModalIsOpen[1])
-                ?.comments?.length === 0 ? <h1 >No Comments Yet</h1> : null
+                ?.comments?.length === 0 ? <h1 className={styles.noComment}>No Comments Yet</h1> : null
             }
           </ul>
           <div className={styles.writeCommentContainer}>

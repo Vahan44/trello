@@ -22,12 +22,10 @@ const Workspaces: FC = () => {
   const dispatch = useAppDispatch()
   
   useEffect(() => {
-    if (!boards[0]) {
       dispatch(fetchPosts());
       console.log(boards)
-    }
 
-  }, [dispatch, boards]);
+  }, [dispatch]);
 
   const [addingBoard, updatingBoard] = useState<boolean>(false)
 
