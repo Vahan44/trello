@@ -103,6 +103,8 @@ border-radius: 5px;
     display: flex;
     justify-content: center;
     margin-bottom: -10px;
+    
+    
 }
 
 .deleteBoard:hover{

@@ -6,9 +6,6 @@ import styles from './App.module.css';
 import Header from '../Header/ui/Header';
 import LogInPage from '../pages/LogInPage/ui';
 import Dashboard from './Dashboaard';
-//import { setUser, setWorkspaces } from '../UserData/UserSlice';
-import { onAuthStateChanged, signOut, User } from 'firebase/auth'
-import { auth } from '../../src/firebase'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../Redux/store';
 import SignUp from '../pages/SignUp/ui/SignUp';
@@ -29,7 +26,7 @@ const App: FC = () => {
     return state.user
   })
 
-
+console.log(90909909090909090,user)
 
 
  
@@ -45,6 +42,7 @@ const App: FC = () => {
 
           <Route path='/' element={<Dashboard />} />
           <Route path='*' element={<h1 >Not Foung</h1>} />
+          
           {user.profile ? <>
 
             <Route path='/MainPage' element={<MainPage />} />

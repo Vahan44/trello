@@ -82,6 +82,10 @@
     height: min-content;
     width: 150px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   .userMenu ul {
@@ -115,6 +119,7 @@
     border: none;
     font-size: 500; 
     font-weight: 600;
+    cursor: pointer;
   }
 
   .signOutButton{
@@ -179,3 +184,4 @@
   background: fixed;
   
 }
+

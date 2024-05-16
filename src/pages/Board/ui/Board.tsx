@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import styles from "./Board.module.css"
 import { useSelector } from 'react-redux';
@@ -14,7 +14,7 @@ import { createPost, deletePost, fetchPost, fetchPosts, updatePost } from '../..
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { FaComment } from "react-icons/fa";
 import { createDecipheriv } from 'crypto';
-
+import UserInfoModal from '../../../app/widgets/userInfoModal/userInfoModal';
 
 
 interface CardType {
@@ -58,7 +58,7 @@ const Board: FC = () => {
 
   let board = boards.find((boardData: any) => boardData.id === id)?.board
 
-  const [columns, setColumns] = useState(board?.columns);
+  const [columns, setColumns] = useState<any>(board?.columns);
 
   const [addingTascButton, setAddingTascButton] = useState<string>("");
   const [addingTascInput, setAddingTascInput] = useState<string>('');
@@ -72,6 +72,10 @@ const Board: FC = () => {
   const [commentValue, setCommentValue] = useState<string>('');
 
   const [commentModalIsOpen, setCommentModalIsOpen] = useState<string[]>(['', ''])
+  
+
+  const [comment1, setComment1] = useState<any>('');
+
   useEffect(() => {
     if (id && !board) {
       dispatch(fetchPost(id))
@@ -102,8 +106,8 @@ const Board: FC = () => {
       return;
     }
 
-    const sourceColumn: ColumnType = columns?.find((column) => column.id === source.droppableId) as ColumnType;
-    const destinationColumn: ColumnType = columns?.find((column) => column.id === destination.droppableId) as ColumnType;
+    const sourceColumn: ColumnType = columns?.find((column:any) => column.id === source.droppableId) as ColumnType;
+    const destinationColumn: ColumnType = columns?.find((column:any) => column.id === destination.droppableId) as ColumnType;
 
     const newSourceCards = Array.from(sourceColumn?.cards)
     const [removedCard] = newSourceCards.splice(source.index, 1);
@@ -116,7 +120,7 @@ const Board: FC = () => {
         cards: newSourceCards,
       };
 
-      // setColumns(columns?.map(column => column.id === newColumn.id ? newColumn : column))
+       setColumns(columns?.map((column:any) => column.id === newColumn.id ? newColumn : column))
     } else {
       const newDestinationCards: CardType[] = Array.from(destinationColumn.cards);
       newDestinationCards.splice(destination.index, 0, removedCard);
@@ -133,12 +137,24 @@ const Board: FC = () => {
       }
 
 
-      // setColumns(columns.map(column => {
-      //   if (column.id === newSourceColumn.id) return newSourceColumn;
-      //   if (column.id === newDestinationColumn.id) return newDestinationColumn;
-      //   return column
-      // }))
+      setColumns(columns.map((column: any) => {
+        if (column.id === newSourceColumn.id) return newSourceColumn;
+        if (column.id === newDestinationColumn.id) return newDestinationColumn;
+        return column
+      }))
     }
+    let newBoard: any = JSON.parse(JSON.stringify(board))
+      if(1){
+        newBoard.columns = columns
+debugger
+
+        // if (id && newBoard) {
+           dispatch(updatePost({ id, newBoard }))
+  
+  
+        //}
+      }
+    
   }
 
 
@@ -258,7 +274,6 @@ const Board: FC = () => {
     if (newListTitle !== '') {
       let newBoard: any = JSON.parse(JSON.stringify(board))
       if (newBoard && newBoard.columns) {
-        debugger
         let colId = newBoard.columns[newBoard.columns.length - 1]?.id || 'col-1'
         let columns = newBoard.columns
         columns.push({
@@ -283,21 +298,34 @@ const Board: FC = () => {
   }
 
   const addComment = async () => {
-    let newBoard: any = JSON.parse(JSON.stringify(board))
-    newBoard?.columns?.find((col: Column) => col.id === commentModalIsOpen[0])
-      ?.cards?.find((card: any) => card.id === commentModalIsOpen[1])
-      ?.comments?.push(
-        {
-          author: user.displayName,
-          comment: commentValue,
-          authorImg: user.photoURL
-        }
-      )
-
-    if (id && newBoard) {
-      await dispatch(updatePost({ id, newBoard }))
-    }
+if(commentValue !== ''){
+  let newBoard: any = JSON.parse(JSON.stringify(board))
+  newBoard?.columns?.find((col: Column) => col.id === commentModalIsOpen[0])
+    ?.cards?.find((card: any) => card.id === commentModalIsOpen[1])
+    ?.comments?.push(
+      {
+        author: user.displayName,
+        comment: commentValue,
+        authorImg: user.photoURL
+      }
+    )
     setCommentValue('')
+
+  if (id && newBoard) {
+    await dispatch(updatePost({ id, newBoard }))
+  }
+
+}
+  }
+
+
+  const openUserInfoModal = (comment:any) => {
+    if(comment1==''){
+          setComment1(comment)
+
+    }else{
+          setComment1('')
+    }
   }
   return (
 
@@ -309,7 +337,7 @@ const Board: FC = () => {
           <div className={styles.Board}>
             {
               !loding && board.columns ?
-                columns?.map((col, index) => {
+                columns?.map((col:any, index:any) => {
                   return (
                     <Droppable droppableId={col.id} key={col.id}>
                       {
@@ -329,7 +357,7 @@ const Board: FC = () => {
 
                               </div>
                               {
-                                col.cards.map((card, index) => {
+                                col.cards.map((card:any, index:any) => {
                                   return (
                                     <Draggable key={card.id} draggableId={card.id} index={index}>
                                       {
@@ -376,6 +404,7 @@ const Board: FC = () => {
                                 : null}
 
                               <button onClick={handleAddCard} name={col.id} className={styles.addCard}><FaPlus />Add a Card</button>
+
                             </div>
                           )
                         }
@@ -383,6 +412,8 @@ const Board: FC = () => {
                     </Droppable>
                   )
                 })
+
+
 
                 : null}
             {!loding && board?.columns ?
@@ -423,7 +454,7 @@ const Board: FC = () => {
                       <li className={!witchUser ? styles.comment : styles.mycomment}>
                         <div className={styles.obautauthor}>
                             <div className={styles.blok}>
-                            <img src={comment.authorImg} loading = "lazy" alt="" />
+                            <img loading={'lazy'}src={comment.authorImg} alt="" onClick={()=>openUserInfoModal(comment)}/>
                             </div>
                           <p>{comment.comment}</p>
                         </div>
@@ -445,7 +476,7 @@ const Board: FC = () => {
           </ul>
           <div className={styles.writeCommentContainer}>
 
-            <input className={styles.commentInput} type="text" onChange={commentChange} placeholder='Write a comment' />
+            <input id='commentInput' className={styles.commentInput} type="text" onChange={commentChange} placeholder='Write a comment' value={commentValue} />
             <button onClick={addComment} className={styles.submitComment}>Submit</button>
 
           </div>
@@ -454,7 +485,12 @@ const Board: FC = () => {
         </div>
         : null
       }
+
+        {comment1 ? <UserInfoModal profile={comment1}/> : null}
+
     </>
+
+    
   );
 }
 

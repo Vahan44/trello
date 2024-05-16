@@ -1,4 +1,4 @@
-import {GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import {GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import { auth } from '../firebase'
 import { signInWithPopup } from 'firebase/auth'
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
@@ -13,31 +13,44 @@ interface User {
 
 
 export const signInWithEmailPassword = createAsyncThunk(
-    'user/loginWithGoogle',
+    'user.signinWithMailPassword',
     async ([email, password]: string[]) => {
-        signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+
+
+        console.log(userCredential);
         const userData: User = {
-            uid: userCredential.user.uid,
+            uid:  userCredential.user.uid,
             email: userCredential.user.email,
             displayName: userCredential.user.displayName,
             photoURL: userCredential.user.photoURL || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6M4NWghKPuAh1lEjThjCMcdSp9cn029guiwej3QjFg&s'
         }
+        localStorage.setItem('userData', JSON.stringify(userData))
+
         return userData;
+        
+        } catch (error) {
+            console.log(error)
+        }
+      
+
+       
          
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
     }
     )
 
-
     export const signUpWithMailPassword = createAsyncThunk(
         'user.signUpWithMailPassword',
-        async ([email, password]: string[]) => {
+        async ([email, password, nicname]: string[]) => {
             createUserWithEmailAndPassword(auth, email, password)
-              .then((userCredential) => {
+              .then(async (userCredential) => {
+
+                
+
+                await updateProfile(userCredential.user, { displayName: nicname });
                 console.log(userCredential);
                 
               })
@@ -152,6 +165,11 @@ const userSlice = createSlice({
         [signInWithEmailPassword.fulfilled as any]: (state, action) => {
             state.loading = false;
             state.profile = action.payload;
+            
+        },
+        [signInWithEmailPassword.rejected as any]: (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
         },
         [handleSingOut.fulfilled as any]: (state) => {
             state.profile = null

@@ -79,7 +79,7 @@ const Header: FC = () => {
             </Link>
           </li> : null}
           <li>
-            {user.profile ? <Link className={styles.button} to='/creatNewBoard'>
+            {user.profile ? <Link className={styles.button} to='/MainPage?creatingBoard=true'>
               Create
             </Link> : null}
           </li>
@@ -115,7 +115,7 @@ const Header: FC = () => {
               </div> : null}
 
 
-              <img loading="lazy" onClick={toggleUserMenu}
+              <img onClick={toggleUserMenu}
                 src={user.profile.photoURL || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6M4NWghKPuAh1lEjThjCMcdSp9cn029guiwej3QjFg&s'}
                 alt=""
                 className={styles.userImage}

@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styles from "./MainPage.module.css"
 import { FaTrello } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
@@ -13,9 +13,9 @@ import Workspaces from "../../Workspaces/ui/Workspaces";
 const MainPage: FC = () => {
 
 
+
   const [workspaceMenue, setworkspaceMenue] = useState<boolean>(false)
   //const {displayWorkspace, setDisplayWorkspace} = useState<string>('all')
-
 
 
   const user = useSelector((state: RootState) => {
@@ -36,8 +36,8 @@ const MainPage: FC = () => {
 
   return (
     <div className={styles.mainPage}>
-      {user.profile ?
         <div className={styles.leftSideBar}>
+
           <ul>
             <li>
               <Link to="/">
@@ -47,13 +47,14 @@ const MainPage: FC = () => {
             <hr />
             <li className={styles.addWorkspaces}>
               <small>Workspaces</small>
-              
             </li>
 
             <div className={styles.workspaces}>
               <div onClick={openWorkspaceMenue} className={styles.workspaceHeader}>
-                <img loading = "lazy"src={user.profile?.photoURL ? user.profile?.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'} alt="" />
-                <p>{user.profile?.displayName}'s Workspaces</p>
+                
+                <img src={user.profile?.photoURL ? user.profile?.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'} alt="" />
+                <p>{user.profile?.displayName}'s Workspaces </p>
+
                 <RiArrowDropDownLine className={workspaceMenue ? styles.up : styles.drop} />
               </div>
               {
@@ -72,7 +73,7 @@ const MainPage: FC = () => {
           </ul>
 
 
-        </div> : null}
+        </div> 
 
       <div className="mainPageBody">
         <Workspaces />
